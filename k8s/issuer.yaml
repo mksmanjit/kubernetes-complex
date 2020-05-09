@@ -1,8 +1,14 @@
 apiVersion: cert-manager.io/v1alpha2
-kind: Issuer
+kind: ClusterIssuer
 metadata:
-  name: ca-issuer
-  namespace: mesh-system
+  name: letsencrypt-prod
 spec:
-  ca:
-    secretName: ca-key-pair
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: 'mksmanjit@gmail.com'
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    solvers:
+      - http01:
+          ingress:
+            class: nginx

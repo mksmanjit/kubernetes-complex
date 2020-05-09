@@ -6,8 +6,15 @@ spec:
   secretName: med-gauranshi-com
   issuerRef: 
     name: letsencrypt-prod
-    kind: Issuer
-    group: cert-manager.io
+    kind: ClusterIssuer
+  commonName: medgauranshi.com
   dnsNames:
     - medgauranshi.com
     - www.medgauranshi.com
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - medgauranshi.com
+          - www.medgauranshi.com
